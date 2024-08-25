@@ -1,0 +1,91 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div *ngFor="let question of questions">
+          <div *ngIf="question.isVisible">
+            <label>{{ question.label }}</label>
+            <ng-container [ngSwitch]="question.type">
+              <input
+                type="text"
+                *ngSwitchCase="'text'"
+                [placeholder]="question.label"
+                class="form-control"
+                [formControlName]="question.label"
+              />
+
+              <input
+                type="number"
+                *ngSwitchCase="'number'"
+                [placeholder]="question.label"
+                class="form-control"
+                [formControlName]="question.label"
+              />
+
+              <div *ngSwitchCase="'slider'">
+                <input
+                  (mouseover)="show = true"
+                  (mouseleave)="show = false"
+                  type="range"
+                  class="form-control"
+                  min="3"
+                  max="90"
+                  [formControlName]="question.label"
+                />
+                <p class="small" *ngIf="show === true">
+                  {{
+                    form.value[question.label] ? form.value[question.label] : ""
+                  }}
+                </p>
+              </div>
+
+              <select
+                *ngSwitchCase="'dropdown'"
+                class="form-control"
+                [formControlName]="question.label"
+              >
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+                <option value="Others">Others</option>
+              </select>
+              <textarea
+                type="textarea"
+                *ngSwitchCase="'textarea'"
+                [placeholder]="question.label"
+                class="form-control"
+                [formControlName]="question.label"
+              ></textarea>
+              <input
+                type="checkbox"
+                *ngSwitchCase="'checkbox'"
+                [placeholder]="question.label"
+                [formControlName]="question.label"
+              />
+              <p
+                class="help-block"
+                *ngIf="
+                  !form.get(question.label)?.valid &&
+                  form.get(question.label)?.touched
+                "
+              >
+                {{
+                  question.hint
+                    ? question.hint
+                    : "Enter / Select a proper value"
+                }}
+              </p>
+            </ng-container>
+          </div>
+        </div>
+      </form>
+      <button
+        class="btn btn-primary"
+        [disabled]="!form.valid"
+        (click)="onSubmit()"
+        type="submit"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</div>
