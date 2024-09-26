@@ -5,5 +5,7 @@ export interface dynamicJson {
   isRequired: boolean;
   errorMessage?: string;
   hint?: string;
+  value?: string;
+  options?: string[];
 }
 [];

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { dynamicJson } from './dynamicJson.service';
+import { dynamicJson } from './dynamicJson.model';
 
 @Injectable({ providedIn: 'root' })
 export class QuestionService {
@@ -33,6 +33,8 @@ export class QuestionService {
       isVisible: true,
       isRequired: true,
       errorMessage: 'Please select your gender',
+      value: 'Female',
+      options: ['Male', 'Female', 'other'],
     },
     {
       type: 'textarea',

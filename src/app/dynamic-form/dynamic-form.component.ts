@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { QuestionService } from '../question.service';
-import { dynamicJson } from '../dynamicJson.service';
+import { dynamicJson } from '../dynamicJson.model';
 
 @Component({
   selector: 'app-dynamic-form',
@@ -37,7 +37,10 @@ export class DynamicFormComponent implements OnInit {
         } else if (question.type === 'slider') {
           this.form.addControl(question.label, this.fb.control('', validators));
         } else if (question.type === 'dropdown') {
-          this.form.addControl(question.label, this.fb.control('', validators));
+          this.form.addControl(
+            question.label,
+            this.fb.control('Female', validators)
+          );
         } else if (question.type === 'checkbox') {
           this.form.addControl(
             question.label,

@@ -44,9 +44,9 @@
                 class="form-control"
                 [formControlName]="question.label"
               >
-                <option value="Female">Female</option>
-                <option value="Male">Male</option>
-                <option value="Others">Others</option>
+                <option [value]="i" *ngFor="let i of question.options">
+                  {{ i }}
+                </option>
               </select>
               <textarea
                 type="textarea"
